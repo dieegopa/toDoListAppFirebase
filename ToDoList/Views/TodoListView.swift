@@ -21,7 +21,6 @@ struct TodoListView: View {
         self._items = FirestoreQuery(
             collectionPath: "users/\(userId)/todos",
             predicates: [
-                .order(by: "isDone", descending: true),
                 .order(by: "dueDate", descending: false)
             ]
         )

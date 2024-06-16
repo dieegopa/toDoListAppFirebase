@@ -40,6 +40,9 @@
 		AF5CDED52C1EFCCF00A11216 /* AnimationsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED42C1EFCCF00A11216 /* AnimationsFilterView.swift */; };
 		AF5CDED72C1EFD3C00A11216 /* BouncyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED62C1EFD3C00A11216 /* BouncyButton.swift */; };
 		AF5CDED92C1EFFCD00A11216 /* NotificationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED82C1EFFCD00A11216 /* NotificationCountView.swift */; };
+		AF5CDEDC2C1F26DA00A11216 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDEDB2C1F26DA00A11216 /* CustomTabBarView.swift */; };
+		AF5CDEDE2C1F26F200A11216 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDEDD2C1F26F200A11216 /* Tab.swift */; };
+		AF5CDEE32C1F374E00A11216 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = AF5CDEE22C1F374E00A11216 /* Pow */; };
 		AF9D37752C1E3D0D00CBC8B7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF9D37742C1E3D0D00CBC8B7 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +78,8 @@
 		AF5CDED42C1EFCCF00A11216 /* AnimationsFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsFilterView.swift; sourceTree = "<group>"; };
 		AF5CDED62C1EFD3C00A11216 /* BouncyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButton.swift; sourceTree = "<group>"; };
 		AF5CDED82C1EFFCD00A11216 /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
+		AF5CDEDB2C1F26DA00A11216 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
+		AF5CDEDD2C1F26F200A11216 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		AF9D37742C1E3D0D00CBC8B7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF3D7D932C1D985100E79AF1 /* FirebaseAuth in Frameworks */,
+				AF5CDEE32C1F374E00A11216 /* Pow in Frameworks */,
 				AF3D7D952C1D985100E79AF1 /* FirebaseFirestore in Frameworks */,
 				AF3D7D972C1D985100E79AF1 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -150,6 +156,7 @@
 				AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */,
 				AF5CDED22C1EFBE400A11216 /* AnimationModeFilter.swift */,
 				AF5CDED62C1EFD3C00A11216 /* BouncyButton.swift */,
+				AF5CDEDD2C1F26F200A11216 /* Tab.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,6 +190,7 @@
 				AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */,
 				AF5CDED42C1EFCCF00A11216 /* AnimationsFilterView.swift */,
 				AF5CDED82C1EFFCD00A11216 /* NotificationCountView.swift */,
+				AF5CDEDB2C1F26DA00A11216 /* CustomTabBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +222,7 @@
 				AF3D7D922C1D985100E79AF1 /* FirebaseAuth */,
 				AF3D7D942C1D985100E79AF1 /* FirebaseFirestore */,
 				AF3D7D962C1D985100E79AF1 /* FirebaseFirestoreSwift */,
+				AF5CDEE22C1F374E00A11216 /* Pow */,
 			);
 			productName = ToDoList;
 			productReference = AF3D7D5A2C1D96E000E79AF1 /* ToDoList.app */;
@@ -245,6 +254,7 @@
 			mainGroup = AF3D7D512C1D96E000E79AF1;
 			packageReferences = (
 				AF3D7D912C1D985100E79AF1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AF5CDEE12C1F374E00A11216 /* XCRemoteSwiftPackageReference "Pow" */,
 			);
 			productRefGroup = AF3D7D5B2C1D96E000E79AF1 /* Products */;
 			projectDirPath = "";
@@ -281,6 +291,7 @@
 				AF3D7D8C2C1D97D700E79AF1 /* LoginViewViewModel.swift in Sources */,
 				AF3D7D782C1D97AE00E79AF1 /* LoginView.swift in Sources */,
 				AF3D7D7C2C1D97AE00E79AF1 /* NewItemView.swift in Sources */,
+				AF5CDEDC2C1F26DA00A11216 /* CustomTabBarView.swift in Sources */,
 				AF3D7D8B2C1D97D700E79AF1 /* TodoListItemViewViewModel.swift in Sources */,
 				AF5CDED12C1EECD500A11216 /* AnimationsTagView.swift in Sources */,
 				AF3D7D9B2C1DAEA000E79AF1 /* TLButton.swift in Sources */,
@@ -289,6 +300,7 @@
 				AF3D7D7E2C1D97AE00E79AF1 /* TodoListView.swift in Sources */,
 				AF5CDED92C1EFFCD00A11216 /* NotificationCountView.swift in Sources */,
 				AF3D7D7B2C1D97AE00E79AF1 /* TodoListItemView.swift in Sources */,
+				AF5CDEDE2C1F26F200A11216 /* Tab.swift in Sources */,
 				AF3D7D892C1D97D700E79AF1 /* TodoListViewViewModel.swift in Sources */,
 				AF3D7D902C1D97ED00E79AF1 /* TodoListItem.swift in Sources */,
 				AF5CDECF2C1EECBB00A11216 /* AnimationModeTag.swift in Sources */,
@@ -522,6 +534,14 @@
 				minimumVersion = 10.27.0;
 			};
 		};
+		AF5CDEE12C1F374E00A11216 /* XCRemoteSwiftPackageReference "Pow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EmergeTools/Pow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -539,6 +559,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF3D7D912C1D985100E79AF1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		AF5CDEE22C1F374E00A11216 /* Pow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF5CDEE12C1F374E00A11216 /* XCRemoteSwiftPackageReference "Pow" */;
+			productName = Pow;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Pow
 
 struct TodoListItemView: View {
     @StateObject var viewModel = TodoListItemViewViewModel()
@@ -22,13 +23,20 @@ struct TodoListItemView: View {
                 
                 Spacer()
                 
-                Button {
-                    viewModel.toggleIsDone(item: item)
-                } label: {
-                    Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(item.dueDate < Date().timeIntervalSince1970 && !item.isDone ? .red : item.isDone ? .green : .secondary)
+                if item.isDone {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.red)
+                        .transition(
+                            .movingParts.pop(.red)
+                        )
+                        .font(.title2)
+                } else {
+                    Image(systemName: "circle")
+                        .foregroundColor(.secondary)
+                        .transition(.identity)
                         .font(.title2)
                 }
+                
             }
         } label : {
             HStack {
@@ -45,6 +53,7 @@ struct TodoListItemView: View {
         .onTapGesture {
             viewModel.toggleIsDone(item: item)
         }
+        .backgroundStyle(Material.thinMaterial)
         .foregroundColor(item.dueDate < Date().timeIntervalSince1970 && !item.isDone ? .red : .primary)
         .overlay(
             RoundedRectangle(cornerRadius: 8)

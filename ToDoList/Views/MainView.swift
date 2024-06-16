@@ -10,6 +10,10 @@ import SwiftUI
 struct MainView: View {
     @StateObject var viewModel = MainViewViewModel()
     
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
+    
     var body: some View {
         if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
             accountView
@@ -20,18 +24,26 @@ struct MainView: View {
     
     @ViewBuilder
     var accountView: some View {
-        TabView {
-            TodoListView(userId: viewModel.currentUserId)
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
+        
+        ZStack {
             
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.circle")
+            VStack{
+                TabView {
+                    if viewModel.selectedTab == .house {
+                        TodoListView(userId: viewModel.currentUserId)
+                    } else if viewModel.selectedTab == .person {
+                        ProfileView()
+                    }
+                    
+                    
                 }
+                .transition(.scale)
+                
+                Spacer()
+                CustomTabBarView(selectedTab: $viewModel.selectedTab)
+                
+            }
         }
-        .tint(.green)
     }
 }
 

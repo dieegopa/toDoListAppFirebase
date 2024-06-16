@@ -10,6 +10,7 @@ import Foundation
 
 class MainViewViewModel: ObservableObject {
     @Published var currentUserId: String = ""
+    @Published var selectedTab: Tab = .house
     private var handler: AuthStateDidChangeListenerHandle?
     
     init() {

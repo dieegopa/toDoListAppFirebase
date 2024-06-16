@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Pow
 
 struct TLButton: View {
     let title: String
@@ -13,12 +14,7 @@ struct TLButton: View {
     let action: () -> Void
     
     var body: some View {
-        
         ZStack {
-            Color(UIColor(background)).opacity(0.8)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .edgesIgnoringSafeArea(.all)
-            
             Button(action: {
                 action()
             }) {
@@ -30,7 +26,9 @@ struct TLButton: View {
             .foregroundColor(.white)
             .buttonStyle(CustomButtonStyle(backgroundColor: background, pressedColor: background.opacity(0.5)))
         }
+        .listRowBackground(Color.clear)
         .listRowInsets(EdgeInsets())
+        .scrollContentBackground(.hidden)
     }
 }
 
@@ -44,8 +42,13 @@ private struct CustomButtonStyle: ButtonStyle {
 
         configuration.label
             .foregroundColor(.white)
-            .background(background)
+            .background(background, in: Rectangle())
             .cornerRadius(8)
+            .opacity(configuration.isPressed ? 0.75 : 1)
+            .conditionalEffect(
+              .pushDown,
+              condition: configuration.isPressed
+            )
     }
 }
 

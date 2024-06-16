@@ -10,7 +10,7 @@ import SwiftUI
 struct AnimationsTagView: View {
     @Binding var tagSelected: AnimationModeTag
     @Environment(\.colorScheme) var colorScheme
-    let color = Color.indigo
+    let color = Color.gray
     
     var body: some View {
         VStack {

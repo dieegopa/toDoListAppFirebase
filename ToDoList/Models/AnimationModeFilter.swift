@@ -38,17 +38,4 @@ enum AnimationModeFilter: Int, CaseIterable {
             return "Expired"
         }
     }
-    
-    var color: Color {
-        switch self {
-        case .all:
-            return .primary
-        case .completed:
-            return .green
-        case .pending:
-            return .blue
-        case .expired:
-            return .red
-        }
-    }
 }

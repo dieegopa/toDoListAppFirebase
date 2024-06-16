@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AnimationsFilterView: View {
     @Environment(\.colorScheme) var colorScheme
-    let color = Color.indigo
+    let color = Color.gray
     
     @Binding var pendingItemsCount: Int
     @Binding var completedItemsCount: Int
@@ -39,18 +39,18 @@ struct AnimationsFilterView: View {
                     } label: {
                         VStack(spacing: 7) {
                             Image(systemName: mode.imageName)
-                                .font(.title2)
-                                .overlay {
+                                .font(.title3)
+                                .overlay(alignment: .topLeading) {
                                     NotificationCountView(value: mode.title == "All" ? $allItemsCount : mode.title == "Pending" ? $pendingItemsCount : mode.title == "Completed" ? $completedItemsCount : $expiredItemsCount)
                                 }
                             
                             Text(mode.title)
-                                .font(.caption)
+                                .font(.footnote)
                         }
                         .frame(maxWidth: .infinity)
                         .padding(8)
-                        .padding(.vertical, 13)
-                        .foregroundColor(mode.color)
+                        .padding(.vertical, 8)
+                        .foregroundColor(.primary)
                         
                         .contentShape(Rectangle())
                     }
@@ -85,7 +85,6 @@ struct AnimationsFilterView: View {
             }
             .padding(.horizontal, 20)
             .animation(.smooth, value: filterSelected)
-            
             
         }
     }

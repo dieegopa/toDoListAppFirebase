@@ -57,6 +57,10 @@ struct NewItemView: View {
             if let editItem = editItem {
                 viewModel.title = editItem.title
                 viewModel.dueDate = Date(timeIntervalSince1970: editItem.dueDate)
+                
+                let animationModeIndex = AnimationModeTag.allCases.firstIndex(where: { $0.title == editItem.tag }) ?? 0
+                
+                viewModel.tag = AnimationModeTag(rawValue: animationModeIndex) ?? .normal
             }
         }
     }
