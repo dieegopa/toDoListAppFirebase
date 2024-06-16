@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel = MainViewViewModel()
+    @StateObject private var manager: CoreDataManager = CoreDataManager()
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -17,16 +18,18 @@ struct MainView: View {
     var body: some View {
         if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
             accountView
+                .environmentObject(manager)
+                .environment(\.managedObjectContext, manager.container.viewContext)
         } else {
             LoginView()
+                .environmentObject(manager)
+                .environment(\.managedObjectContext, manager.container.viewContext)
         }
     }
     
     @ViewBuilder
     var accountView: some View {
-        
         ZStack {
-            
             VStack{
                 TabView {
                     if viewModel.selectedTab == .house {

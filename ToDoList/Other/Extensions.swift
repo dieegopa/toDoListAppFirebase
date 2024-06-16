@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension Encodable {
     func asDictionary() -> [String: Any] {
@@ -19,5 +20,11 @@ extension Encodable {
         } catch {
             return [:]
         }
+    }
+}
+
+extension View {
+    public func redactShimmer(condition: Bool) -> some View {
+        modifier(RedactAndShimmerViewModifier(condition: condition))
     }
 }

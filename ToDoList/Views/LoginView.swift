@@ -10,6 +10,8 @@ import Pow
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
+    @EnvironmentObject var manager: CoreDataManager
+    @Environment(\.managedObjectContext) var viewContext
     
     var body: some View {
         NavigationView {
@@ -72,7 +74,7 @@ struct LoginView: View {
                     
                     TLButton(title: "Log in", background: .green)
                     {
-                        viewModel.login()
+                        viewModel.login(manager: manager, viewContext: viewContext)
                     }
                     .frame(height: 50)
                 }

@@ -7,9 +7,11 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Codable, Equatable {
     let id: String
     let name: String
     let email: String
     let joined: TimeInterval
+    
+    static let sample = User(id: "", name: "", email: "", joined: 0)
 }

@@ -6,18 +6,16 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
+    @FetchRequest(sortDescriptors: []) private var userCore: FetchedResults<UserCore>
     
     var body: some View {
         NavigationView {
             VStack {
-                if let user = viewModel.user {
-                    profile(user: user)
-                } else {
-                    Text("Loading...")
-                }
+                profile(user: userCore.first!)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -29,22 +27,34 @@ struct ProfileView: View {
             }
             .padding(.top, 20)
         }
-        .onAppear{
-            viewModel.fetchUser()
-        }
     }
     
     @ViewBuilder
-    func profile(user: User) -> some View {
+    func profile(user: UserCore) -> some View {
         let url = URL(string: "https://i.pravatar.cc/300?u=a")
-        AsyncImage(url: url) { image in
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .clipShape(Circle())
-        } placeholder: {
-            Circle()
-                .foregroundColor(.secondary)
+        let transaction = Transaction(animation: Animation.easeIn(duration: 2.0))
+        
+        AsyncImage(url: url, transaction: transaction) { image in
+            switch image {
+            case .empty:
+                Circle()
+                    .foregroundColor(.secondary)
+                    .redacted(reason: .placeholder)
+                    .shimmering()
+            case .success(let image):
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+                
+            case .failure(let err):
+                Circle()
+                    .foregroundColor(.secondary)
+                    .redacted(reason: .placeholder)
+                    .shimmering()
+            @unknown default:
+                EmptyView()
+            }
         }
         .frame(width: 120, height: 120)
         .padding(.bottom, 20)
