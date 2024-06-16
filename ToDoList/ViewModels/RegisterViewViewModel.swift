@@ -14,6 +14,7 @@ class RegisterViewViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
+    @Published var showAlert = 0
     
     init() {}
     
@@ -25,6 +26,7 @@ class RegisterViewViewModel: ObservableObject {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             
             guard let userId = result?.user.uid else {
+                self?.showAlert += 1
                 return
             }
             

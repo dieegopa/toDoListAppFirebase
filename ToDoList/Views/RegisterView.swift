@@ -19,58 +19,65 @@ struct RegisterView: View {
                        background: .orange,
                        padding: -40)
             
-            Form {
-                VStack {
-                    TextField("Full Name", text: $viewModel.name)
-                        .autocorrectionDisabled()
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.orange.opacity(0.5), lineWidth: 1)
-                        )
-                        .padding(.horizontal, 2)
-                        .tint(.orange)
-                    
-                    TextField("Email Adress", text: $viewModel.email)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.orange.opacity(0.5), lineWidth: 1)
-                        )
-                        .padding(.horizontal, 2)
-                        .tint(.orange)
-                    
-                    SecureField("Password", text: $viewModel.password)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.orange.opacity(0.5), lineWidth: 1)
-                        )
-                        .padding(.horizontal, 2)
-                        .tint(.orange)
-                    
-                }
-                .frame(width: UIScreen.main.bounds.width - 40)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .background(Color(UIColor.systemBackground))
-                .padding(.top, -10)
-                .padding(.bottom, -10)
+            VStack {
+                TextField("Full Name", text: $viewModel.name)
+                    .autocorrectionDisabled()
+                    .padding(.horizontal, 10)
+                    .tint(.orange)
+                    .padding(.vertical, 15)
+                    .background(Material.thinMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.secondary.opacity(0.3), lineWidth: 1)
+                    )
+                    .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
                 
-                Section {
-                    TLButton(title: "Create account", background: .orange) {
-                        viewModel.register()
-                    }
+                TextField("Email", text: $viewModel.email)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .padding(.horizontal, 10)
+                    .tint(.orange)
+                    .padding(.vertical, 15)
+                    .background(Material.thinMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.secondary.opacity(0.3), lineWidth: 1)
+                    )
+                    .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
+                
+                SecureField("Password", text: $viewModel.password)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .padding(.horizontal, 10)
+                    .tint(.orange)
+                    .padding(.vertical, 15)
+                    .background(Material.thinMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.secondary.opacity(0.3), lineWidth: 1)
+                    )
+                    .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
+                
+                if !viewModel.errorMessage.isEmpty {
+                    Text(viewModel.errorMessage)
+                        .foregroundColor(Color.red.opacity(0.8))
+                        .background(Color(UIColor.systemBackground))
+                        .animation(.easeInOut(duration: 1), value: viewModel.errorMessage)
+                        .task {
+                            viewModel.showAlert += 1
+                            try? await Task.sleep(nanoseconds: 2_500_000_000)
+                            viewModel.errorMessage = ""
+                        }
                 }
                 
+                TLButton(title: "Create account", background: .orange) {
+                    viewModel.register()
+                }
+                .frame(height: 50)
             }
             .offset(y: -50)
-            .scrollContentBackground(.hidden)
-            .scrollDisabled(true)
-            .background(Color(UIColor.systemBackground))
+            .padding(.horizontal, 20)
+            
             
             Spacer()
         }

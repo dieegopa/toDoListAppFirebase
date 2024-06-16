@@ -13,7 +13,7 @@ class LoginViewViewModel: ObservableObject {
     @Published var password = ""
     @Published var errorMessage = ""
     @Published var loginErrorMessage = ""
-    @Published var showAlert = false
+    @Published var showAlert = 0
     
     init() {}
     
@@ -28,11 +28,10 @@ class LoginViewViewModel: ObservableObject {
             [weak self] result, error in
             guard error == nil else {
                 self?.loginErrorMessage = error?.localizedDescription ?? "An error occurred."
-                self?.showAlert = true
+                self?.showAlert += 1
                 return
             }
             
-            self?.showAlert = false
             self?.loginErrorMessage = ""
         }
         

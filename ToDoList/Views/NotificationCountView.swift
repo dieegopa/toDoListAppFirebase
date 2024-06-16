@@ -24,24 +24,20 @@ struct NotificationCountView : View {
                 .fill(background)
                 .frame(width: size * widthMultplier(), height: size, alignment: .topTrailing)
                 .position(x: x, y: y)
-                .animation(.easeIn(duration: 0.1), value: value)
             if hasTwoOrLessDigits() {
                 Text("\(value)")
                     .foregroundColor(foreground)
                     .font(Font.caption)
                     .position(x: x, y: y)
-                    .animation(.easeIn(duration: 0.1), value: value)
             } else {
                 Text("99+")
                     .foregroundColor(foreground)
                     .font(Font.caption)
                     .frame(width: size * widthMultplier(), height: size, alignment: .center)
                     .position(x: x, y: y)
-                    .animation(.easeIn(duration: 0.1), value: value)
             }
         }
         .opacity(value == 0 ? 0 : 1)
-        .animation(.easeIn(duration: 0.1), value: value)
     }
     
     func hasTwoOrLessDigits() -> Bool {

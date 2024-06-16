@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Pow
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
@@ -19,66 +20,69 @@ struct LoginView: View {
                            padding: 0
                 )
                 
-                Form {
+                VStack {
+                    TextField("Email", text: $viewModel.email)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .padding(.horizontal, 10)
+                        .tint(.green)
+                        .padding(.vertical, 15)
+                        .background(Material.thinMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.secondary.opacity(0.3), lineWidth: 1)
+                        )
+                        .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
                     
-                    VStack {
-                        TextField("Email", text: $viewModel.email)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.green.opacity(0.5), lineWidth: 1)
-                            )
-                            .padding(.horizontal, 2)
-                            .tint(.green)
-                        
-                        
-                        SecureField("Password", text: $viewModel.password)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.green.opacity(0.5), lineWidth: 1)
-                            )
-                            .padding(.horizontal, 2)
-                            .tint(.green)
-                        
-                        if !viewModel.errorMessage.isEmpty {
-                            Text(viewModel.errorMessage)
-                                .foregroundColor(Color.red.opacity(0.8))
-                                .background(Color(UIColor.systemBackground))
-                        }
-                        
-                        
-                    }
-                    .frame(width: UIScreen.main.bounds.width - 40)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color(UIColor.systemBackground))
-                    .padding(.top, -10)
-                    .padding(.bottom, -10)
+                    SecureField("Password", text: $viewModel.password)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .padding(.horizontal, 10)
+                        .tint(.green)
+                        .padding(.vertical, 15)
+                        .background(Material.thinMaterial, in: RoundedRectangle(cornerRadius: 10.0))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.secondary.opacity(0.3), lineWidth: 1)
+                        )
+                        .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
                     
-                    Section {
-                        TLButton(title: "Log in", background: .green)
-                        {
-                            if(!viewModel.showAlert) {
-                                viewModel.login()
+                    if !viewModel.errorMessage.isEmpty {
+                        Text(viewModel.errorMessage)
+                            .foregroundColor(Color.red.opacity(0.8))
+                            .background(Color(UIColor.systemBackground))
+                            .animation(.easeInOut(duration: 3), value: viewModel.errorMessage)
+                            .task {
+                                viewModel.showAlert += 1
+                                try? await Task.sleep(nanoseconds: 2_500_000_000)
+                                viewModel.errorMessage = ""
                             }
-                        }
                     }
                     
+                    if !viewModel.loginErrorMessage.isEmpty {
+                        Text("Invalid credentials")
+                            .foregroundColor(Color.red.opacity(0.8))
+                            .background(Color(UIColor.systemBackground))
+                            .animation(.easeInOut(duration: 3), value: viewModel.loginErrorMessage)
+                            .task {
+                                try? await Task.sleep(nanoseconds: 2_500_000_000)
+                                viewModel.loginErrorMessage = ""
+                            }
+                    }
+                    
+                    TLButton(title: "Log in", background: .green)
+                    {
+                        viewModel.login()
+                    }
+                    .frame(height: 50)
                 }
                 .offset(y: -50)
-                .scrollContentBackground(.hidden)
-                .scrollDisabled(true)
-                .background(Color(UIColor.systemBackground))
-                .alert(isPresented: $viewModel.showAlert) {
-                    Alert(title: Text("Error") , message: Text(viewModel.loginErrorMessage)
-                    )
-                }
+                .padding(.horizontal, 20)
+                
+                
                 
                 VStack {
+                    Spacer()
                     Text("New around here?")
                     NavigationLink("Create an account",
                                    destination: RegisterView()
