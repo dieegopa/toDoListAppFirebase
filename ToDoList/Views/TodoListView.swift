@@ -35,97 +35,17 @@ struct TodoListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                VStack(alignment: .center) {
-                    HStack(alignment: .center) {
-                        GroupBox {
-                            HStack {
-                                Label("Expired", systemImage: "exclamationmark.circle.fill")
-                                    .bold()
-                                    .foregroundColor(.red)
-                                
-                                Text(String(viewModel.expiredItemsCount))
-                                    .bold()
-                            }
-                        }
-                        .onTapGesture {
-                            if(viewModel.filteredExpired) {
-                                viewModel.filteredExpired = false
-                                viewModel.itemsCopy = items
-                            } else {
-                                viewModel.filteredExpired = true
-                                viewModel.filteredPending = false
-                                viewModel.filteredCompleted = false
-                                let itemsFiltered = items.filter { !$0.isDone && $0.dueDate < Date().timeIntervalSince1970 }
-                                viewModel.itemsCopy = itemsFiltered
-                            }
-                        }
-                        
-                        GroupBox {
-                            HStack {
-                                Label("Pending", systemImage: "questionmark.app.fill")
-                                    .bold()
-                                    .foregroundColor(.blue)
-                                Text(String(viewModel.pendingItemsCount))
-                                    .bold()
-                            }
-                        }
-                        .onTapGesture {
-                            if(viewModel.filteredPending) {
-                                viewModel.filteredPending = false
-                                viewModel.itemsCopy = items
-                            } else {
-                                viewModel.filteredPending = true
-                                viewModel.filteredExpired = false
-                                viewModel.filteredCompleted = false
-                                let itemsFiltered = items.filter { !$0.isDone && $0.dueDate > Date().timeIntervalSince1970 }
-                                viewModel.itemsCopy = itemsFiltered
-                            }
-                        }
-                    }
-                        
-                    HStack(alignment: .center) {
-                        GroupBox {
-                            HStack {
-                                Label("Completed", systemImage: "checkmark.seal.fill")
-                                    .bold()
-                                    .foregroundColor(.green)
-                                
-                                Text(String(viewModel.completedItemsCount))
-                                    .bold()
-                            }
-                        }
-                        .onTapGesture {
-                            if(viewModel.filteredCompleted) {
-                                viewModel.filteredCompleted = false
-                                viewModel.itemsCopy = items
-                            } else {
-                                viewModel.filteredCompleted = true
-                                viewModel.filteredPending = false
-                                viewModel.filteredExpired = false
-                                let itemsFiltered = items.filter { $0.isDone }
-                                viewModel.itemsCopy = itemsFiltered
-                            }
-                        }
-                        
-                        GroupBox {
-                            HStack {
-                                Label("All", systemImage: "tray.fill")
-                                    .bold()
-                                    .foregroundColor(.primary)
-                                
-                                Text(String(items.count))
-                                    .bold()
-                            }
-                        }
-                        .onTapGesture {
-                            viewModel.filteredExpired = false
-                            viewModel.filteredPending = false
-                            viewModel.filteredCompleted = false
-                            viewModel.itemsCopy = items
-                        }
-                    }
-                }
-               
+                
+                AnimationsFilterView(
+                    pendingItemsCount: $viewModel.pendingItemsCount,
+                    completedItemsCount: $viewModel.completedItemsCount,
+                    expiredItemsCount: $viewModel.expiredItemsCount,
+                    allItemsCount: $viewModel.allItemsCount,
+                    filterSelected: $viewModel.filter,
+                    items: .constant(items),
+                    itemsCopy: $viewModel.itemsCopy
+                )
+                
                 
                 List(viewModel.itemsCopy) { item in
                     TodoListItemView(item: item)
@@ -148,15 +68,17 @@ struct TodoListView: View {
                         })
                 }
                 .listStyle(.plain)
-                .onChange(of: items) {
-                    viewModel.pendingItemsCount = items.filter { !$0.isDone && $0.dueDate > Date().timeIntervalSince1970 }.count
+                .onChange(of: items, perform: { value in
+                    viewModel.pendingItemsCount = value.filter { !$0.isDone && $0.dueDate > Date().timeIntervalSince1970 }.count
                     
-                    viewModel.expiredItemsCount = items.filter { !$0.isDone && $0.dueDate < Date().timeIntervalSince1970 }.count
+                    viewModel.expiredItemsCount = value.filter { !$0.isDone && $0.dueDate < Date().timeIntervalSince1970 }.count
                     
-                    viewModel.completedItemsCount = items.filter { $0.isDone }.count
+                    viewModel.completedItemsCount = value.filter { $0.isDone }.count
                     
-                    viewModel.itemsCopy = items
-                }
+                    viewModel.allItemsCount = value.count
+                    
+                    viewModel.itemsCopy = value
+                })
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{

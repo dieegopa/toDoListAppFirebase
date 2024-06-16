@@ -15,10 +15,9 @@ class TodoListViewViewModel: ObservableObject {
     @Published var pendingItemsCount = 0
     @Published var expiredItemsCount = 0
     @Published var completedItemsCount = 0
-    @Published var filteredExpired = false
-    @Published var filteredCompleted = false
-    @Published var filteredPending = false
+    @Published var allItemsCount = 0
     @Published var itemsCopy: [TodoListItem] = []
+    @Published var filter: AnimationModeFilter = .all
     
     private let userId: String
     

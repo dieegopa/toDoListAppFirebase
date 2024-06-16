@@ -89,6 +89,7 @@ struct LoginView: View {
                 
                 Spacer()
             }
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .tint(.black)
     }

@@ -12,7 +12,7 @@ struct TodoListItemView: View {
     let item: TodoListItem
     
     var body: some View {
-        GroupBox(item.title) {
+        GroupBox {
             HStack {
                 VStack(alignment: .leading) {
                     Text("\(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
@@ -26,9 +26,20 @@ struct TodoListItemView: View {
                     viewModel.toggleIsDone(item: item)
                 } label: {
                     Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
-                        .foregroundColor(item.dueDate < Date().timeIntervalSince1970 && !item.isDone ? .red : .green)
+                        .foregroundColor(item.dueDate < Date().timeIntervalSince1970 && !item.isDone ? .red : item.isDone ? .green : .secondary)
                         .font(.title2)
                 }
+            }
+        } label : {
+            HStack {
+                Image(systemName: "square.fill")
+                    .foregroundColor(
+                        item.tag == "Urgent" ? .red :
+                            item.tag == "Important" ? .yellow :
+                            item.tag == "Normal" ? .blue :
+                                .primary
+                    )
+                Text(item.title)
             }
         }
         .onTapGesture {
@@ -50,6 +61,7 @@ struct TodoListItemView: View {
             title: "Test",
             dueDate: Date().timeIntervalSince1970,
             createdDate: Date().timeIntervalSince1970,
+            tag: "Important",
             isDone: true
         )
     )

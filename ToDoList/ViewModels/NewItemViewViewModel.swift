@@ -12,6 +12,7 @@ import FirebaseFirestore
 class NewItemViewViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var dueDate = Date()
+    @Published var tag: AnimationModeTag = .normal
     @Published var showAlert = false
     
     init() {}
@@ -35,7 +36,8 @@ class NewItemViewViewModel: ObservableObject {
                 .updateData([
                     "title": title,
                     "dueDate": dueDate.timeIntervalSince1970,
-                    "isDone": item?.title == title && item?.dueDate == dueDate.timeIntervalSince1970 && item?.isDone == true ? true : false
+                    "isDone": item?.title == title && item?.dueDate == dueDate.timeIntervalSince1970 && item?.isDone == true ? true : false,
+                    "tag": tag.title
                 ])
         } else {
             let newId = UUID().uuidString
@@ -44,6 +46,7 @@ class NewItemViewViewModel: ObservableObject {
                 title: title,
                 dueDate: dueDate.timeIntervalSince1970,
                 createdDate: Date().timeIntervalSince1970,
+                tag: tag.title,
                 isDone: false
             )
             
@@ -67,5 +70,4 @@ class NewItemViewViewModel: ObservableObject {
         
         return true
     }
-    
 }

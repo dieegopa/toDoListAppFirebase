@@ -34,6 +34,8 @@ struct NewItemView: View {
                 DatePicker("Due Date", selection: $viewModel.dueDate)
                     .datePickerStyle(GraphicalDatePickerStyle())
                 
+                AnimationsTagView(tagSelected: $viewModel.tag)
+                
                 // Button
                 Section {
                     TLButton(title: "Save", background: .green) {

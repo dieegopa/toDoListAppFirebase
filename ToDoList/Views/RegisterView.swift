@@ -74,6 +74,7 @@ struct RegisterView: View {
             
             Spacer()
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 

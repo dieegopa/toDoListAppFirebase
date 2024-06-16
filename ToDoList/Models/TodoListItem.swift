@@ -12,6 +12,7 @@ struct TodoListItem: Codable, Identifiable, Equatable {
     let title: String
     let dueDate: TimeInterval
     let createdDate: TimeInterval
+    let tag: String
     var isDone: Bool
     
     mutating func setDone(_ state: Bool) {

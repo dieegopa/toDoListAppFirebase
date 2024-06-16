@@ -15,7 +15,7 @@ struct TLButton: View {
     var body: some View {
         
         ZStack {
-            Color(background).opacity(0.8)
+            Color(UIColor(background)).opacity(0.8)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .edgesIgnoringSafeArea(.all)
             
@@ -28,8 +28,24 @@ struct TLButton: View {
                     .bold()
             }
             .foregroundColor(.white)
+            .buttonStyle(CustomButtonStyle(backgroundColor: background, pressedColor: background.opacity(0.5)))
         }
         .listRowInsets(EdgeInsets())
+    }
+}
+
+private struct CustomButtonStyle: ButtonStyle {
+    let backgroundColor: Color
+    let pressedColor: Color
+
+    @ViewBuilder
+    func makeBody(configuration: Configuration) -> some View {
+        let background = configuration.isPressed ? pressedColor : backgroundColor
+
+        configuration.label
+            .foregroundColor(.white)
+            .background(background)
+            .cornerRadius(8)
     }
 }
 

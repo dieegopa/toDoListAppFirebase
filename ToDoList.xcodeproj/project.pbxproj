@@ -33,6 +33,13 @@
 		AF3D7D992C1D98B900E79AF1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF3D7D982C1D98B900E79AF1 /* GoogleService-Info.plist */; };
 		AF3D7D9B2C1DAEA000E79AF1 /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D7D9A2C1DAEA000E79AF1 /* TLButton.swift */; };
 		AF3D7D9D2C1DDA5400E79AF1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D7D9C2C1DDA5400E79AF1 /* Extensions.swift */; };
+		AF5CDECD2C1EEABA00A11216 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDECC2C1EEABA00A11216 /* Tag.swift */; };
+		AF5CDECF2C1EECBB00A11216 /* AnimationModeTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */; };
+		AF5CDED12C1EECD500A11216 /* AnimationsTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */; };
+		AF5CDED32C1EFBE400A11216 /* AnimationModeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED22C1EFBE400A11216 /* AnimationModeFilter.swift */; };
+		AF5CDED52C1EFCCF00A11216 /* AnimationsFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED42C1EFCCF00A11216 /* AnimationsFilterView.swift */; };
+		AF5CDED72C1EFD3C00A11216 /* BouncyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED62C1EFD3C00A11216 /* BouncyButton.swift */; };
+		AF5CDED92C1EFFCD00A11216 /* NotificationCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED82C1EFFCD00A11216 /* NotificationCountView.swift */; };
 		AF9D37752C1E3D0D00CBC8B7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF9D37742C1E3D0D00CBC8B7 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +68,13 @@
 		AF3D7D982C1D98B900E79AF1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF3D7D9A2C1DAEA000E79AF1 /* TLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
 		AF3D7D9C2C1DDA5400E79AF1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		AF5CDECC2C1EEABA00A11216 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModeTag.swift; sourceTree = "<group>"; };
+		AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsTagView.swift; sourceTree = "<group>"; };
+		AF5CDED22C1EFBE400A11216 /* AnimationModeFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModeFilter.swift; sourceTree = "<group>"; };
+		AF5CDED42C1EFCCF00A11216 /* AnimationsFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsFilterView.swift; sourceTree = "<group>"; };
+		AF5CDED62C1EFD3C00A11216 /* BouncyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButton.swift; sourceTree = "<group>"; };
+		AF5CDED82C1EFFCD00A11216 /* NotificationCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCountView.swift; sourceTree = "<group>"; };
 		AF9D37742C1E3D0D00CBC8B7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +97,7 @@
 			children = (
 				AF3D7D5C2C1D96E000E79AF1 /* ToDoList */,
 				AF3D7D5B2C1D96E000E79AF1 /* Products */,
+				AF5CDEDA2C1F0ED200A11216 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +146,10 @@
 			children = (
 				AF3D7D8E2C1D97ED00E79AF1 /* TodoListItem.swift */,
 				AF3D7D8D2C1D97ED00E79AF1 /* User.swift */,
+				AF5CDECC2C1EEABA00A11216 /* Tag.swift */,
+				AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */,
+				AF5CDED22C1EFBE400A11216 /* AnimationModeFilter.swift */,
+				AF5CDED62C1EFD3C00A11216 /* BouncyButton.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -161,8 +180,18 @@
 				AF3D7D742C1D97AE00E79AF1 /* TodoListItemView.swift */,
 				AF3D7D772C1D97AE00E79AF1 /* TodoListView.swift */,
 				AF3D7D9A2C1DAEA000E79AF1 /* TLButton.swift */,
+				AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */,
+				AF5CDED42C1EFCCF00A11216 /* AnimationsFilterView.swift */,
+				AF5CDED82C1EFFCD00A11216 /* NotificationCountView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		AF5CDEDA2C1F0ED200A11216 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,23 +277,30 @@
 				AF3D7D7D2C1D97AE00E79AF1 /* ProfileView.swift in Sources */,
 				AF3D7D7A2C1D97AE00E79AF1 /* HeaderView.swift in Sources */,
 				AF3D7D882C1D97D700E79AF1 /* RegisterViewViewModel.swift in Sources */,
+				AF5CDECD2C1EEABA00A11216 /* Tag.swift in Sources */,
 				AF3D7D8C2C1D97D700E79AF1 /* LoginViewViewModel.swift in Sources */,
 				AF3D7D782C1D97AE00E79AF1 /* LoginView.swift in Sources */,
 				AF3D7D7C2C1D97AE00E79AF1 /* NewItemView.swift in Sources */,
 				AF3D7D8B2C1D97D700E79AF1 /* TodoListItemViewViewModel.swift in Sources */,
+				AF5CDED12C1EECD500A11216 /* AnimationsTagView.swift in Sources */,
 				AF3D7D9B2C1DAEA000E79AF1 /* TLButton.swift in Sources */,
 				AF3D7D8F2C1D97ED00E79AF1 /* User.swift in Sources */,
 				AF3D7D792C1D97AE00E79AF1 /* RegisterView.swift in Sources */,
 				AF3D7D7E2C1D97AE00E79AF1 /* TodoListView.swift in Sources */,
+				AF5CDED92C1EFFCD00A11216 /* NotificationCountView.swift in Sources */,
 				AF3D7D7B2C1D97AE00E79AF1 /* TodoListItemView.swift in Sources */,
 				AF3D7D892C1D97D700E79AF1 /* TodoListViewViewModel.swift in Sources */,
 				AF3D7D902C1D97ED00E79AF1 /* TodoListItem.swift in Sources */,
+				AF5CDECF2C1EECBB00A11216 /* AnimationModeTag.swift in Sources */,
 				AF3D7D872C1D97D700E79AF1 /* NewItemViewViewModel.swift in Sources */,
 				AF3D7D9D2C1DDA5400E79AF1 /* Extensions.swift in Sources */,
+				AF5CDED52C1EFCCF00A11216 /* AnimationsFilterView.swift in Sources */,
 				AF3D7D602C1D96E000E79AF1 /* MainView.swift in Sources */,
 				AF3D7D8A2C1D97D700E79AF1 /* ProfileViewViewModel.swift in Sources */,
 				AF3D7D862C1D97D700E79AF1 /* MainViewViewModel.swift in Sources */,
 				AF3D7D5E2C1D96E000E79AF1 /* ToDoListApp.swift in Sources */,
+				AF5CDED32C1EFBE400A11216 /* AnimationModeFilter.swift in Sources */,
+				AF5CDED72C1EFD3C00A11216 /* BouncyButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +444,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -439,6 +476,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
