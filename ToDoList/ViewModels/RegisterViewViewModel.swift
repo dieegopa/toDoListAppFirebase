@@ -14,7 +14,8 @@ class RegisterViewViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
-    @Published var showAlert = 0
+    @Published var showAlert = false
+    @Published var registerAttemps = 0
     
     init() {}
     
@@ -26,7 +27,8 @@ class RegisterViewViewModel: ObservableObject {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             
             guard let userId = result?.user.uid else {
-                self?.showAlert += 1
+                self!.showAlert.toggle()
+                self!.registerAttemps += 1
                 return
             }
             
@@ -65,16 +67,22 @@ class RegisterViewViewModel: ObservableObject {
               !email.trimmingCharacters(in: .whitespaces).isEmpty,
               !password.trimmingCharacters(in: .whitespaces).isEmpty else {
             errorMessage = "Please fill in all fields."
+            showAlert.toggle()
+            registerAttemps += 1
             return false
         }
         
         guard email.contains("@") && email.contains(".") else {
             errorMessage = "Please enter a valid email."
+            showAlert.toggle()
+            registerAttemps += 1
             return false
         }
         
         guard password.count >= 6 else {
             errorMessage = "Password should be at least 6 characters"
+            showAlert.toggle()
+            registerAttemps += 1
             return false
         }
         

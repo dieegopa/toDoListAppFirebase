@@ -30,7 +30,7 @@ struct RegisterView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.secondary.opacity(0.3), lineWidth: 1)
                     )
-                    .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
+                    .changeEffect(.shake(rate: .fast), value: viewModel.registerAttemps)
                 
                 TextField("Email", text: $viewModel.email)
                     .autocorrectionDisabled()
@@ -43,7 +43,7 @@ struct RegisterView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.secondary.opacity(0.3), lineWidth: 1)
                     )
-                    .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
+                    .changeEffect(.shake(rate: .fast), value: viewModel.registerAttemps)
                 
                 SecureField("Password", text: $viewModel.password)
                     .textInputAutocapitalization(.never)
@@ -56,22 +56,28 @@ struct RegisterView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.secondary.opacity(0.3), lineWidth: 1)
                     )
-                    .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
+                    .changeEffect(.shake(rate: .fast), value: viewModel.registerAttemps)
                 
-                if !viewModel.errorMessage.isEmpty {
+                if viewModel.showAlert {
                     Text(viewModel.errorMessage)
                         .foregroundColor(Color.red.opacity(0.8))
                         .background(Color(UIColor.systemBackground))
-                        .animation(.easeInOut(duration: 1), value: viewModel.errorMessage)
-                        .task {
-                            viewModel.showAlert += 1
-                            try? await Task.sleep(nanoseconds: 2_500_000_000)
-                            viewModel.errorMessage = ""
-                        }
+                        .transition(.movingParts.blur)
                 }
                 
                 TLButton(title: "Create account", background: .orange) {
-                    viewModel.register()
+                    withAnimation {
+                        viewModel.register()
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation {
+                            if(viewModel.showAlert) {
+                                viewModel.showAlert.toggle()
+                            }
+                        }
+                    }
+                    
                 }
                 .frame(height: 50)
             }

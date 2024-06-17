@@ -11,6 +11,7 @@ import Pow
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
     @Environment(\.modelContext) private var modelContext
+    @State var isAdded = false
     
     var body: some View {
         NavigationView {
@@ -34,7 +35,7 @@ struct LoginView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.secondary.opacity(0.3), lineWidth: 1)
                         )
-                        .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
+                        .changeEffect(.shake(rate: .fast), value: viewModel.loginAttemps)
                     
                     SecureField("Password", text: $viewModel.password)
                         .textInputAutocapitalization(.never)
@@ -47,41 +48,33 @@ struct LoginView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(.secondary.opacity(0.3), lineWidth: 1)
                         )
-                        .changeEffect(.shake(rate: .fast), value: viewModel.showAlert)
+                        .changeEffect(.shake(rate: .fast), value: viewModel.loginAttemps)
                     
-                    if !viewModel.errorMessage.isEmpty {
+                    if viewModel.showAlert {
                         Text(viewModel.errorMessage)
                             .foregroundColor(Color.red.opacity(0.8))
                             .background(Color(UIColor.systemBackground))
-                            .animation(.easeInOut(duration: 3), value: viewModel.errorMessage)
-                            .task {
-                                viewModel.showAlert += 1
-                                try? await Task.sleep(nanoseconds: 2_500_000_000)
-                                viewModel.errorMessage = ""
-                            }
+                            .transition(.movingParts.blur)
                     }
                     
-                    if !viewModel.loginErrorMessage.isEmpty {
-                        Text("Invalid credentials")
-                            .foregroundColor(Color.red.opacity(0.8))
-                            .background(Color(UIColor.systemBackground))
-                            .animation(.easeInOut(duration: 3), value: viewModel.loginErrorMessage)
-                            .task {
-                                try? await Task.sleep(nanoseconds: 2_500_000_000)
-                                viewModel.loginErrorMessage = ""
+                    TLButton(title: "Log in", background: .green) {
+                        withAnimation {
+                            viewModel.login(modelContext: modelContext)
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                if(viewModel.showAlert) {
+                                    viewModel.showAlert.toggle()
+                                }
                             }
-                    }
-                    
-                    TLButton(title: "Log in", background: .green)
-                    {
-                        viewModel.login(modelContext: modelContext)
+                        }
                     }
                     .frame(height: 50)
+                    
                 }
                 .offset(y: -50)
                 .padding(.horizontal, 20)
-                
-                
                 
                 VStack {
                     Spacer()

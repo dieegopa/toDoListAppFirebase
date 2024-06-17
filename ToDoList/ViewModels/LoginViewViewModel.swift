@@ -15,8 +15,8 @@ class LoginViewViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errorMessage = ""
-    @Published var loginErrorMessage = ""
-    @Published var showAlert = 0
+    @Published var loginAttemps = 0
+    @Published var showAlert = false
     
     init() {}
     
@@ -26,18 +26,15 @@ class LoginViewViewModel: ObservableObject {
             return
         }
         
-        // Try to log in
         Auth.auth().signIn(withEmail: email, password: password) {
             [weak self] result, error in
             guard error == nil else {
-                self?.loginErrorMessage = error?.localizedDescription ?? "An error occurred."
-                self?.showAlert += 1
+                self!.loginAttemps += 1
                 return
             }
             
             guard let user = result?.user else {
-                self?.loginErrorMessage = "An error occurred."
-                self?.showAlert += 1
+                self?.loginAttemps += 1
                 return
             }
             
@@ -47,8 +44,8 @@ class LoginViewViewModel: ObservableObject {
                 .document(user.uid)
                 .getDocument { document, error in
                     guard let document = document, document.exists else {
-                        self?.loginErrorMessage = "An error occurred."
-                        self?.showAlert += 1
+                        self?.loginAttemps += 1
+                        
                         return
                     }
                     
@@ -73,7 +70,7 @@ class LoginViewViewModel: ObservableObject {
                         modelContext.insert(userData)
                     }
                 }
-            self?.loginErrorMessage = ""
+            self?.showAlert = false
         }
         
     }
@@ -82,11 +79,15 @@ class LoginViewViewModel: ObservableObject {
         errorMessage = ""
         guard !email.trimmingCharacters(in: .whitespaces).isEmpty, !password.trimmingCharacters(in: .whitespaces).isEmpty else {
             errorMessage = "Please fill in all fields."
+            showAlert.toggle()
+            loginAttemps += 1
             return false
         }
         
         guard email.contains("@") && email.contains(".") else {
             errorMessage = "Please enter a valid email."
+            showAlert.toggle()
+            loginAttemps += 1
             return false
         }
         
