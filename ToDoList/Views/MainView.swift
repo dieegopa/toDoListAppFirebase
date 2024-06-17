@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
+import FirebaseAuth
 
 struct MainView: View {
     @StateObject var viewModel = MainViewViewModel()
-    @StateObject private var manager: CoreDataManager = CoreDataManager()
+    var sharedModelContainer = SharedModelContainer().container
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -18,12 +20,10 @@ struct MainView: View {
     var body: some View {
         if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
             accountView
-                .environmentObject(manager)
-                .environment(\.managedObjectContext, manager.container.viewContext)
+                .modelContainer(sharedModelContainer)
         } else {
             LoginView()
-                .environmentObject(manager)
-                .environment(\.managedObjectContext, manager.container.viewContext)
+                .modelContainer(sharedModelContainer)
         }
     }
     
@@ -37,8 +37,6 @@ struct MainView: View {
                     } else if viewModel.selectedTab == .person {
                         ProfileView()
                     }
-                    
-                    
                 }
                 .transition(.scale)
                 

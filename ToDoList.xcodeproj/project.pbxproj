@@ -34,10 +34,7 @@
 		AF3D7D9B2C1DAEA000E79AF1 /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D7D9A2C1DAEA000E79AF1 /* TLButton.swift */; };
 		AF3D7D9D2C1DDA5400E79AF1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D7D9C2C1DDA5400E79AF1 /* Extensions.swift */; };
 		AF5B33502C1F9A3000EAB61A /* RedactAndShimmerViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B334F2C1F9A3000EAB61A /* RedactAndShimmerViewModifier.swift */; };
-		AF5B33572C1F9F5D00EAB61A /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF5B33552C1F9F5D00EAB61A /* ToDoList.xcdatamodeld */; };
-		AF5B33592C1F9FEA00EAB61A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B33582C1F9FEA00EAB61A /* CoreDataManager.swift */; };
-		AF5B33642C1FA92100EAB61A /* UserCore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B33622C1FA92100EAB61A /* UserCore+CoreDataClass.swift */; };
-		AF5B33652C1FA92100EAB61A /* UserCore+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B33632C1FA92100EAB61A /* UserCore+CoreDataProperties.swift */; };
+		AF5B336A2C1FB18200EAB61A /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B33692C1FB18200EAB61A /* SharedModelContainer.swift */; };
 		AF5CDECD2C1EEABA00A11216 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDECC2C1EEABA00A11216 /* Tag.swift */; };
 		AF5CDECF2C1EECBB00A11216 /* AnimationModeTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */; };
 		AF5CDED12C1EECD500A11216 /* AnimationsTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */; };
@@ -78,10 +75,7 @@
 		AF3D7D9A2C1DAEA000E79AF1 /* TLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
 		AF3D7D9C2C1DDA5400E79AF1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AF5B334F2C1F9A3000EAB61A /* RedactAndShimmerViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactAndShimmerViewModifier.swift; sourceTree = "<group>"; };
-		AF5B33562C1F9F5D00EAB61A /* ToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoList.xcdatamodel; sourceTree = "<group>"; };
-		AF5B33582C1F9FEA00EAB61A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		AF5B33622C1FA92100EAB61A /* UserCore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserCore+CoreDataClass.swift"; sourceTree = "<group>"; };
-		AF5B33632C1FA92100EAB61A /* UserCore+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserCore+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AF5B33692C1FB18200EAB61A /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
 		AF5CDECC2C1EEABA00A11216 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModeTag.swift; sourceTree = "<group>"; };
 		AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsTagView.swift; sourceTree = "<group>"; };
@@ -130,7 +124,7 @@
 		AF3D7D5C2C1D96E000E79AF1 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				AF5B33512C1F9F0800EAB61A /* CoreData */,
+				AF5B33662C1FB0F000EAB61A /* SwiftData */,
 				AF3D7D6D2C1D972300E79AF1 /* Models */,
 				AF3D7D6B2C1D971A00E79AF1 /* Other */,
 				AF3D7D632C1D96E100E79AF1 /* Preview Content */,
@@ -209,15 +203,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		AF5B33512C1F9F0800EAB61A /* CoreData */ = {
+		AF5B33662C1FB0F000EAB61A /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
-				AF5B33622C1FA92100EAB61A /* UserCore+CoreDataClass.swift */,
-				AF5B33632C1FA92100EAB61A /* UserCore+CoreDataProperties.swift */,
-				AF5B33552C1F9F5D00EAB61A /* ToDoList.xcdatamodeld */,
-				AF5B33582C1F9FEA00EAB61A /* CoreDataManager.swift */,
+				AF5B33692C1FB18200EAB61A /* SharedModelContainer.swift */,
 			);
-			path = CoreData;
+			path = SwiftData;
 			sourceTree = "<group>";
 		};
 		AF5CDEDA2C1F0ED200A11216 /* Frameworks */ = {
@@ -313,11 +304,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF5B336A2C1FB18200EAB61A /* SharedModelContainer.swift in Sources */,
 				AF3D7D7D2C1D97AE00E79AF1 /* ProfileView.swift in Sources */,
 				AF3D7D7A2C1D97AE00E79AF1 /* HeaderView.swift in Sources */,
 				AF3D7D882C1D97D700E79AF1 /* RegisterViewViewModel.swift in Sources */,
-				AF5B33642C1FA92100EAB61A /* UserCore+CoreDataClass.swift in Sources */,
-				AF5B33652C1FA92100EAB61A /* UserCore+CoreDataProperties.swift in Sources */,
 				AF5CDECD2C1EEABA00A11216 /* Tag.swift in Sources */,
 				AF3D7D8C2C1D97D700E79AF1 /* LoginViewViewModel.swift in Sources */,
 				AF3D7D782C1D97AE00E79AF1 /* LoginView.swift in Sources */,
@@ -329,7 +319,6 @@
 				AF3D7D8F2C1D97ED00E79AF1 /* User.swift in Sources */,
 				AF3D7D792C1D97AE00E79AF1 /* RegisterView.swift in Sources */,
 				AF3D7D7E2C1D97AE00E79AF1 /* TodoListView.swift in Sources */,
-				AF5B33592C1F9FEA00EAB61A /* CoreDataManager.swift in Sources */,
 				AF5CDED92C1EFFCD00A11216 /* NotificationCountView.swift in Sources */,
 				AF3D7D7B2C1D97AE00E79AF1 /* TodoListItemView.swift in Sources */,
 				AF5CDEDE2C1F26F200A11216 /* Tab.swift in Sources */,
@@ -338,7 +327,6 @@
 				AF5CDECF2C1EECBB00A11216 /* AnimationModeTag.swift in Sources */,
 				AF3D7D872C1D97D700E79AF1 /* NewItemViewViewModel.swift in Sources */,
 				AF3D7D9D2C1DDA5400E79AF1 /* Extensions.swift in Sources */,
-				AF5B33572C1F9F5D00EAB61A /* ToDoList.xcdatamodeld in Sources */,
 				AF5CDED52C1EFCCF00A11216 /* AnimationsFilterView.swift in Sources */,
 				AF3D7D602C1D96E000E79AF1 /* MainView.swift in Sources */,
 				AF3D7D8A2C1D97D700E79AF1 /* ProfileViewViewModel.swift in Sources */,
@@ -629,20 +617,6 @@
 			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		AF5B33552C1F9F5D00EAB61A /* ToDoList.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AF5B33562C1F9F5D00EAB61A /* ToDoList.xcdatamodel */,
-			);
-			currentVersion = AF5B33562C1F9F5D00EAB61A /* ToDoList.xcdatamodel */;
-			name = ToDoList.xcdatamodeld;
-			path = /Users/dieegopa/Desktop/Personal/Develop/ToDoList/ToDoList/CoreData/ToDoList.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = AF3D7D522C1D96E000E79AF1 /* Project object */;
 }

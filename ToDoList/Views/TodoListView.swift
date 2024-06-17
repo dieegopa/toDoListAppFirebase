@@ -67,16 +67,16 @@ struct TodoListView: View {
                         })
                 }
                 .listStyle(.plain)
-                .onChange(of: items, perform: { value in
-                    viewModel.pendingItemsCount = value.filter { !$0.isDone && $0.dueDate > Date().timeIntervalSince1970 }.count
+                .onChange(of: items, { oldValue, newValue in
+                    viewModel.pendingItemsCount = newValue.filter { !$0.isDone && $0.dueDate > Date().timeIntervalSince1970 }.count
                     
-                    viewModel.expiredItemsCount = value.filter { !$0.isDone && $0.dueDate < Date().timeIntervalSince1970 }.count
+                    viewModel.expiredItemsCount = newValue.filter { !$0.isDone && $0.dueDate < Date().timeIntervalSince1970 }.count
                     
-                    viewModel.completedItemsCount = value.filter { $0.isDone }.count
+                    viewModel.completedItemsCount = newValue.filter { $0.isDone }.count
                     
-                    viewModel.allItemsCount = value.count
+                    viewModel.allItemsCount = newValue.count
                     
-                    viewModel.itemsCopy = value
+                    viewModel.itemsCopy = newValue
                 })
             }
             .navigationBarTitleDisplayMode(.inline)

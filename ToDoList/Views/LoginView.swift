@@ -10,8 +10,7 @@ import Pow
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
-    @EnvironmentObject var manager: CoreDataManager
-    @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         NavigationView {
@@ -24,6 +23,7 @@ struct LoginView: View {
                 
                 VStack {
                     TextField("Email", text: $viewModel.email)
+                        .keyboardType(.alphabet)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
                         .padding(.horizontal, 10)
@@ -74,7 +74,7 @@ struct LoginView: View {
                     
                     TLButton(title: "Log in", background: .green)
                     {
-                        viewModel.login(manager: manager, viewContext: viewContext)
+                        viewModel.login(modelContext: modelContext)
                     }
                     .frame(height: 50)
                 }

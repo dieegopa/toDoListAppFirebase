@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAuth
 import CoreData
 import FirebaseFirestore
+import SwiftData
 
 class LoginViewViewModel: ObservableObject {
     @Published var email = ""
@@ -19,7 +20,7 @@ class LoginViewViewModel: ObservableObject {
     
     init() {}
     
-    func login(manager: CoreDataManager, viewContext: NSManagedObjectContext) {
+    func login(modelContext: ModelContext) {
         
         guard validate() else {
             return
@@ -51,26 +52,27 @@ class LoginViewViewModel: ObservableObject {
                         return
                     }
                     
-                    guard let data = document.data() else {
+                    guard let documentData = document.data() else {
                         return
                     }
                     
-                    // Save the user to Core Data
-                    let userCore = UserCore(context: viewContext)
-                    userCore.id = data["id"] as? String ?? ""
-                    userCore.email = data["email"] as? String ?? ""
-                    userCore.name = data["name"] as? String ?? ""
-                    userCore.joined = data["joined"] as? TimeInterval ?? Date().timeIntervalSince1970
-                    
-                    do {
-                        try viewContext.save()
-                    } catch {
-                        print(error)
+                    let url = URL(string: "https://i.pravatar.cc/300?u=a")
+                    getData(from: url!) { imageData, response, error in
+                        guard let imageData = imageData, error == nil else {
+                            return
+                        }
+                        
+                        let userData = User(
+                            id: documentData["id"] as? String ?? "",
+                            name: documentData["email"] as? String ?? "",
+                            email: documentData["name"] as? String ?? "",
+                            joined: documentData["joined"] as? TimeInterval ?? Date().timeIntervalSince1970,
+                            image: imageData
+                        )
+                        
+                        modelContext.insert(userData)
                     }
                 }
-            
-            
-            
             self?.loginErrorMessage = ""
         }
         
@@ -89,6 +91,6 @@ class LoginViewViewModel: ObservableObject {
         }
         
         return true
-    
+        
     }
 }

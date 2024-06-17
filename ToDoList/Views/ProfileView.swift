@@ -7,15 +7,16 @@
 
 import SwiftUI
 import Shimmer
+import SwiftData
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
-    @FetchRequest(sortDescriptors: []) private var userCore: FetchedResults<UserCore>
+    @Query private var user: [User]
     
     var body: some View {
         NavigationView {
             VStack {
-                profile(user: userCore.first!)
+                profile(user: user.first!)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -30,34 +31,13 @@ struct ProfileView: View {
     }
     
     @ViewBuilder
-    func profile(user: UserCore) -> some View {
-        let url = URL(string: "https://i.pravatar.cc/300?u=a")
-        let transaction = Transaction(animation: Animation.easeIn(duration: 2.0))
-        
-        AsyncImage(url: url, transaction: transaction) { image in
-            switch image {
-            case .empty:
-                Circle()
-                    .foregroundColor(.secondary)
-                    .redacted(reason: .placeholder)
-                    .shimmering()
-            case .success(let image):
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-                
-            case .failure(let err):
-                Circle()
-                    .foregroundColor(.secondary)
-                    .redacted(reason: .placeholder)
-                    .shimmering()
-            @unknown default:
-                EmptyView()
-            }
-        }
-        .frame(width: 120, height: 120)
-        .padding(.bottom, 20)
+    func profile(user: User) -> some View {
+        Image(uiImage: UIImage(data: user.image!)!)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .clipShape(Circle())
+            .frame(width: 120, height: 120)
+            .padding(.bottom, 20)
         
         VStack(alignment:.leading) {
             HStack {
