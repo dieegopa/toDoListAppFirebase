@@ -9,5 +9,4 @@ import Foundation
 
 enum Tab: String, CaseIterable {
     case house
-    case person
 }

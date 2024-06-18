@@ -13,37 +13,13 @@ struct MainView: View {
     @StateObject var viewModel = MainViewViewModel()
     var sharedModelContainer = SharedModelContainer().container
     
-    init() {
-        UITabBar.appearance().isHidden = true
-    }
-    
     var body: some View {
         if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
-            accountView
+            TodoListView(userId: viewModel.currentUserId)
                 .modelContainer(sharedModelContainer)
         } else {
             LoginView()
                 .modelContainer(sharedModelContainer)
-        }
-    }
-    
-    @ViewBuilder
-    var accountView: some View {
-        ZStack {
-            VStack{
-                TabView {
-                    if viewModel.selectedTab == .house {
-                        TodoListView(userId: viewModel.currentUserId)
-                    } else if viewModel.selectedTab == .person {
-                        ProfileView()
-                    }
-                }
-                .transition(.scale)
-                
-                Spacer()
-                CustomTabBarView(selectedTab: $viewModel.selectedTab)
-                
-            }
         }
     }
 }

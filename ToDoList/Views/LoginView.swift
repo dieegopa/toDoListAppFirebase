@@ -11,7 +11,6 @@ import Pow
 struct LoginView: View {
     @StateObject var viewModel = LoginViewViewModel()
     @Environment(\.modelContext) private var modelContext
-    @State var isAdded = false
     
     var body: some View {
         NavigationView {
@@ -61,6 +60,7 @@ struct LoginView: View {
                         withAnimation {
                             viewModel.login(modelContext: modelContext)
                         }
+
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {

@@ -84,7 +84,6 @@ struct RegisterView: View {
             .offset(y: -50)
             .padding(.horizontal, 20)
             
-            
             Spacer()
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)

@@ -20,41 +20,6 @@ struct CustomTabBarView: View {
                 ForEach(Tab.allCases, id: \.rawValue) { tab in
                     Spacer()
                     
-                    //                    Button{
-                    //                        withAnimation(.easeIn(duration: 0.1)) {
-                    //                            selectedTab = tab
-                    //                        }
-                    //                    } label: {
-                    //                        Image(systemName: selectedTab == tab ? fillImage : tab.rawValue)
-                    //                            .contentShape(Rectangle())
-                    //                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    //                            .scaleEffect(selectedTab == tab ? 1.25 : 1.0)
-                    //                    }
-                    //                    .foregroundColor(.primary)
-                    //                    .font(.system(size: 20))
-                    //                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-                    //                    .background(.red)
-                    //                    Rectangle()
-                    //                        .fill(selectedTab == tab ? Color.primary : Color.clear)
-                    //                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-                    //                        .onTapGesture {
-                    //                            withAnimation(.easeIn(duration: 0.1)) {
-                    //                                selectedTab = tab
-                    //                            }
-                    //                        }
-                    //                    Image(systemName: selectedTab == tab ? fillImage : tab.rawValue)
-                    //                        .contentShape(Rectangle())
-                    //                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-                    //                        .background(.red)
-                    //                        .scaleEffect(selectedTab == tab ? 1.25 : 1.0)
-                    //                        .foregroundColor(.primary)
-                    //                        .font(.system(size: 20))
-                    //                        .onTapGesture {
-                    //                            withAnimation(.easeIn(duration: 0.1)) {
-                    //                                selectedTab = tab
-                    //                            }
-                    //                        }
-                    
                     Image(systemName: selectedTab == tab ? fillImage : tab.rawValue)
                         .contentShape(Rectangle())
                         .foregroundColor(.primary)

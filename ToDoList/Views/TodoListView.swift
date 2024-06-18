@@ -7,15 +7,17 @@
 
 import SwiftUI
 import FirebaseFirestoreSwift
+import SwiftData
+import Shimmer
+import Pow
 
 struct TodoListView: View {
     
     @StateObject var viewModel: TodoListViewViewModel
     @FirestoreQuery var items: [TodoListItem]
-    private let adaptiveColumn = [
-        GridItem(.fixed(150)),
-        GridItem(.fixed(150)),
-    ]
+    private var userImageData = UserDefaults.standard.data(forKey: "userImageData") ?? nil
+    var dummyData : [TodoListItem] = TodoListItem.example
+    @State private var isLoading : Bool = true
     
     init(userId: String) {
         self._items = FirestoreQuery(
@@ -45,15 +47,15 @@ struct TodoListView: View {
                     itemsCopy: $viewModel.itemsCopy
                 )
                 
-                
-                List(viewModel.itemsCopy) { item in
+                List(isLoading ? dummyData : viewModel.itemsCopy ) { item in
                     TodoListItemView(item: item)
-                        .swipeActions {
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button("Delete") {
                                 viewModel.delete(id: item.id)
                             }
                             .tint(.red)
-                            
+                        }
+                        .swipeActions(edge: .leading) {
                             Button("Edit") {
                                 viewModel.showingEditItemView = true
                                 viewModel.editingItem = item
@@ -65,9 +67,15 @@ struct TodoListView: View {
                             viewModel.showingEditItemView = true
                             viewModel.editingItem = item
                         })
+                        .transition(.movingParts.wipe(
+                                    angle: .degrees(-45),
+                                    blurRadius: 50
+                                  ))
+                        .redactShimmer(condition: isLoading)
                 }
                 .listStyle(.plain)
                 .onChange(of: items, { oldValue, newValue in
+                    
                     viewModel.pendingItemsCount = newValue.filter { !$0.isDone && $0.dueDate > Date().timeIntervalSince1970 }.count
                     
                     viewModel.expiredItemsCount = newValue.filter { !$0.isDone && $0.dueDate < Date().timeIntervalSince1970 }.count
@@ -78,9 +86,42 @@ struct TodoListView: View {
                     
                     viewModel.itemsCopy = newValue
                 })
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation {
+                            if(isLoading) {
+                                isLoading.toggle()
+                            }
+                        }
+                    }
+                }
+                
+                HStack(alignment: .bottom) {
+                    
+                    Spacer()
+                    
+                    Button {
+                        viewModel.showingNewItemView = true
+                    } label: {
+                        Image(systemName: "plus.app.fill")
+                            .contentShape(Rectangle())
+                            .foregroundColor(.primary)
+                            .frame(maxWidth: 40, maxHeight: 40)
+                            .scaleEffect(1.25)
+                            .font(.system(size: 40))
+                    }
+                    
+                }
+                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                .padding(.horizontal, 30)
+                
+                
+                
+                Spacer()
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
+                
                 ToolbarItem(placement: .principal) {
                     Text("To Do's")
                         .font(.largeTitle.bold())
@@ -88,13 +129,24 @@ struct TodoListView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        viewModel.showingNewItemView = true
-                    } label: {
-                        Image(systemName: "plus.app.fill")
-                            .font(.system(size: 20, weight: .bold))
+                    
+                    NavigationLink(destination: ProfileView()) {
+                        
+                        if userImageData == nil {
+                            Image(systemName: "person.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .frame(width: 40, height: 40)
+                        } else {
+                            Image(uiImage: UIImage(data: userImageData!)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .frame(width: 40, height: 40)
+                        }
                     }
-                    .tint(.green)
+                    
                 }
                 
             }
@@ -106,6 +158,7 @@ struct TodoListView: View {
                 NewItemView(newItemPresented: $viewModel.showingEditItemView, editItem: viewModel.editingItem)
             }
         }
+        .tint(.primary)
     }
 }
 
