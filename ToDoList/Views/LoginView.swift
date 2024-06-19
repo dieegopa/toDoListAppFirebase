@@ -57,6 +57,7 @@ struct LoginView: View {
                     TLButton(title: "Log in", isLoading: viewModel.tryingToLogin, background: .green) {
                         
                         withAnimation {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             viewModel.tryingToLogin = true
                             viewModel.login(modelContext: modelContext)
                         }

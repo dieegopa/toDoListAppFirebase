@@ -64,6 +64,7 @@ struct RegisterView: View {
                 
                 TLButton(title: "Create account", isLoading: viewModel.tryingToRegister, background: .orange) {
                     withAnimation {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         viewModel.tryingToRegister = true
                         viewModel.register(modelContext: modelContext)
                     }
