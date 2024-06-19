@@ -13,12 +13,18 @@ struct MainView: View {
     @StateObject var viewModel = MainViewViewModel()
     
     var body: some View {
-        if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
-            TodoListView(userId: viewModel.currentUserId)
-                .modelContainer(for: User.self)
-        } else {
-            LoginView()
-                .modelContainer(for: User.self)
+        VStack {
+            if viewModel.isLogged {
+                if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
+                    TodoListView(userId: viewModel.currentUserId)
+                        .modelContainer(for: User.self)
+                }
+            } else {
+                LoginView()
+                    .modelContainer(for: User.self)
+            }
+        }.onChange(of: viewModel.isSignedIn) { oldValue, newValue in
+            viewModel.isLogged.toggle()
         }
     }
 }

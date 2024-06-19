@@ -9,28 +9,17 @@ import SwiftUI
 
 struct HeaderView: View {
     let title: String
-    let subtitle: String
-    let background: Color
     let padding: Double
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 0)
-                .fill(
-                    LinearGradient(
-                        gradient: Gradient(colors: [background, .clear]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
+                .fill(.clear)
                 .zIndex(1.0)
             VStack {
                 Text(title)
                     .font(.system(size: 40))
                     .bold()
-                
-                Text(subtitle)
-                    .font(.system(size: 20))
             }
             .zIndex(2.0)
         }
@@ -41,5 +30,5 @@ struct HeaderView: View {
 }
 
 #Preview {
-    HeaderView(title: "Title", subtitle: "Subtitle", background: .green, padding: 0)
+    HeaderView(title: "Title", padding: 0)
 }

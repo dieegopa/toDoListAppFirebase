@@ -15,9 +15,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack{
-                HeaderView(title: "To Do List",
-                           subtitle: "Get things done",
-                           background: .green,
+                HeaderView(title: "To Do",
                            padding: 0
                 )
                 
@@ -56,11 +54,10 @@ struct LoginView: View {
                             .transition(.movingParts.blur)
                     }
                     
-                    TLButton(title: "Log in", background: .green) {
+                    TLButton(title: "Log in", isLoading: viewModel.showAlert, background: .green) {
                         withAnimation {
                             viewModel.login(modelContext: modelContext)
                         }
-
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {
@@ -70,6 +67,7 @@ struct LoginView: View {
                             }
                         }
                     }
+                    .disabled(viewModel.showAlert)
                     .frame(height: 50)
                     
                 }
@@ -82,6 +80,7 @@ struct LoginView: View {
                     NavigationLink("Create an account",
                                    destination: RegisterView()
                     )
+                    .bold()
                     .foregroundColor(.green)
                 }
                 .padding([.top, .bottom], 25)
@@ -90,7 +89,7 @@ struct LoginView: View {
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
-        .tint(.black)
+        .tint(.primary)
     }
 }
 

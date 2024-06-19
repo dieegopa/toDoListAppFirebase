@@ -15,6 +15,7 @@ class ProfileViewViewModel: ObservableObject {
     func signOut() {
         do {
             try Auth.auth().signOut()
+            UserDefaults.standard.set(false, forKey: "isLogged")
         } catch {
             print(error)
         }

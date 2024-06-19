@@ -38,7 +38,7 @@ struct NewItemView: View {
                 
                 // Button
                 Section {
-                    TLButton(title: "Save", background: .green) {
+                    TLButton(title: "Save", isLoading: false, background: .green) {
                         if viewModel.canSave {
                             viewModel.save(item: editItem)
                             newItemPresented = false

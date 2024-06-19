@@ -11,6 +11,7 @@ import Foundation
 class MainViewViewModel: ObservableObject {
     @Published var currentUserId: String = ""
     @Published var selectedTab: Tab = .house
+    @Published var isLogged = UserDefaults.standard.bool(forKey: "isLogged")
     private var handler: AuthStateDidChangeListenerHandle?
     
     init() {

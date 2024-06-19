@@ -54,6 +54,7 @@ class RegisterViewViewModel: ObservableObject {
                     .setData(newUser.asDictionary())
                 
                 modelContext.insert(newUser)
+                UserDefaults.standard.set(true, forKey: "isLogged")
             }
         }
     }

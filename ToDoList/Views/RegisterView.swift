@@ -13,10 +13,7 @@ struct RegisterView: View {
     
     var body: some View {
         VStack{
-            // Header
-            HeaderView(title: "Register", 
-                       subtitle: "Start organizing todos",
-                       background: .orange,
+            HeaderView(title: "Register",
                        padding: -40)
             
             VStack {
@@ -65,7 +62,7 @@ struct RegisterView: View {
                         .transition(.movingParts.blur)
                 }
                 
-                TLButton(title: "Create account", background: .orange) {
+                TLButton(title: "Create account", isLoading: viewModel.showAlert, background: .orange) {
                     withAnimation {
                         viewModel.register(modelContext: modelContext)
                     }
@@ -79,6 +76,7 @@ struct RegisterView: View {
                     }
                     
                 }
+                .disabled(viewModel.showAlert)
                 .frame(height: 50)
             }
             .offset(y: -50)

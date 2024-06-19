@@ -59,8 +59,6 @@ class LoginViewViewModel: ObservableObject {
                             return
                         }
                         
-                        UserDefaults.standard.set(imageData, forKey: "userImageData")
-                        
                         let userData = User(
                             id: documentData["id"] as? String ?? "",
                             name: documentData["email"] as? String ?? "",
@@ -70,6 +68,8 @@ class LoginViewViewModel: ObservableObject {
                         )
                         
                         modelContext.insert(userData)
+                        UserDefaults.standard.set(imageData, forKey: "userImageData")
+                        UserDefaults.standard.set(true, forKey: "isLogged")
                     }
                 }
             self?.showAlert = false

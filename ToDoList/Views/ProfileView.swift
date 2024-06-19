@@ -67,7 +67,7 @@ struct ProfileView: View {
         }
         
         Form {
-            TLButton(title: "Sign out", background: .red) {
+            TLButton(title: "Sign out", isLoading: false, background: .red) {
                 modelContext.container.deleteAllData()
                 viewModel.signOut()
             }
