@@ -11,15 +11,14 @@ import FirebaseAuth
 
 struct MainView: View {
     @StateObject var viewModel = MainViewViewModel()
-    var sharedModelContainer = SharedModelContainer().container
     
     var body: some View {
         if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
             TodoListView(userId: viewModel.currentUserId)
-                .modelContainer(sharedModelContainer)
+                .modelContainer(for: User.self)
         } else {
             LoginView()
-                .modelContainer(sharedModelContainer)
+                .modelContainer(for: User.self)
         }
     }
 }

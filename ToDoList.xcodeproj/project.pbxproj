@@ -34,7 +34,6 @@
 		AF3D7D9B2C1DAEA000E79AF1 /* TLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D7D9A2C1DAEA000E79AF1 /* TLButton.swift */; };
 		AF3D7D9D2C1DDA5400E79AF1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D7D9C2C1DDA5400E79AF1 /* Extensions.swift */; };
 		AF5B33502C1F9A3000EAB61A /* RedactAndShimmerViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B334F2C1F9A3000EAB61A /* RedactAndShimmerViewModifier.swift */; };
-		AF5B336A2C1FB18200EAB61A /* SharedModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5B33692C1FB18200EAB61A /* SharedModelContainer.swift */; };
 		AF5CDECD2C1EEABA00A11216 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDECC2C1EEABA00A11216 /* Tag.swift */; };
 		AF5CDECF2C1EECBB00A11216 /* AnimationModeTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */; };
 		AF5CDED12C1EECD500A11216 /* AnimationsTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */; };
@@ -88,7 +87,6 @@
 		AF3D7D9A2C1DAEA000E79AF1 /* TLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLButton.swift; sourceTree = "<group>"; };
 		AF3D7D9C2C1DDA5400E79AF1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AF5B334F2C1F9A3000EAB61A /* RedactAndShimmerViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactAndShimmerViewModifier.swift; sourceTree = "<group>"; };
-		AF5B33692C1FB18200EAB61A /* SharedModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModelContainer.swift; sourceTree = "<group>"; };
 		AF5CDECC2C1EEABA00A11216 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		AF5CDECE2C1EECBB00A11216 /* AnimationModeTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationModeTag.swift; sourceTree = "<group>"; };
 		AF5CDED02C1EECD500A11216 /* AnimationsTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsTagView.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 		AF5B33662C1FB0F000EAB61A /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
-				AF5B33692C1FB18200EAB61A /* SharedModelContainer.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -320,7 +317,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF5B336A2C1FB18200EAB61A /* SharedModelContainer.swift in Sources */,
 				AF3D7D7D2C1D97AE00E79AF1 /* ProfileView.swift in Sources */,
 				AF3D7D7A2C1D97AE00E79AF1 /* HeaderView.swift in Sources */,
 				AF3D7D882C1D97D700E79AF1 /* RegisterViewViewModel.swift in Sources */,

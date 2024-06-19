@@ -7,9 +7,11 @@
 
 import SwiftUI
 import FirebaseCore
+import SwiftData
 
 @main
 struct ToDoListApp: App {
+    
     init() {
         FirebaseApp.configure()
     }

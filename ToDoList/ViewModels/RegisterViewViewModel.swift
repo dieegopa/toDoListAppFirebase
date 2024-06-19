@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import SwiftData
 
 class RegisterViewViewModel: ObservableObject {
     @Published var name = ""
@@ -19,7 +20,7 @@ class RegisterViewViewModel: ObservableObject {
     
     init() {}
     
-    func register() {
+    func register(modelContext: ModelContext) {
         guard validate() else {
             return
         }
@@ -32,34 +33,29 @@ class RegisterViewViewModel: ObservableObject {
                 return
             }
             
-            self?.inserUserRecord(id: userId)
-        }
-    }
-    
-    private func inserUserRecord(id: String) {
-        
-        let url = URL(string: "https://i.pravatar.cc/300?u=a")
-        getData(from: url!) { imageData, response, error in
-            guard let imageData = imageData, error == nil else {
-                return
+            let url = URL(string: "https://i.pravatar.cc/300?u=a")
+            getData(from: url!) { imageData, response, error in
+                guard let imageData = imageData, error == nil else {
+                    return
+                }
+                
+                let newUser = User(
+                    id: userId,
+                    name: self!.name,
+                    email: self!.email,
+                    joined: Date().timeIntervalSince1970,
+                    image: imageData
+                )
+                
+                let db = Firestore.firestore()
+                
+                db.collection("users")
+                    .document(userId)
+                    .setData(newUser.asDictionary())
+                
+                modelContext.insert(newUser)
             }
-            
-            let newUser = User(
-                id: id,
-                name: self.name,
-                email: self.email,
-                joined: Date().timeIntervalSince1970,
-                image: imageData
-            )
-            
-            let db = Firestore.firestore()
-            
-            db.collection("users")
-                .document(id)
-                .setData(newUser.asDictionary())
         }
-        
-        
     }
     
     private func validate() -> Bool {

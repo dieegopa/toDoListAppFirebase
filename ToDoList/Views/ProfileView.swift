@@ -12,6 +12,7 @@ import SwiftData
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
     @Query private var user: [User]
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         NavigationView {
@@ -67,6 +68,7 @@ struct ProfileView: View {
         
         Form {
             TLButton(title: "Sign out", background: .red) {
+                modelContext.container.deleteAllData()
                 viewModel.signOut()
             }
         }

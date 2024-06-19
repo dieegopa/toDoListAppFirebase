@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RegisterView: View {
-    
     @StateObject var viewModel = RegisterViewViewModel()
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         VStack{
@@ -67,7 +67,7 @@ struct RegisterView: View {
                 
                 TLButton(title: "Create account", background: .orange) {
                     withAnimation {
-                        viewModel.register()
+                        viewModel.register(modelContext: modelContext)
                     }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

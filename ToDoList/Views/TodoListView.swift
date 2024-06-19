@@ -16,7 +16,7 @@ struct TodoListView: View {
     @StateObject var viewModel: TodoListViewViewModel
     @FirestoreQuery var items: [TodoListItem]
     private var userImageData = UserDefaults.standard.data(forKey: "userImageData") ?? nil
-    var dummyData : [TodoListItem] = TodoListItem.example
+    var dummyData : [TodoListItem] = TodoListItem.dummyData
     @State private var isLoading : Bool = true
     
     init(userId: String) {
@@ -76,6 +76,14 @@ struct TodoListView: View {
                 .listStyle(.plain)
                 .onChange(of: items, { oldValue, newValue in
                     
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation {
+                            if(isLoading) {
+                                isLoading.toggle()
+                            }
+                        }
+                    }
+                    
                     viewModel.pendingItemsCount = newValue.filter { !$0.isDone && $0.dueDate > Date().timeIntervalSince1970 }.count
                     
                     viewModel.expiredItemsCount = newValue.filter { !$0.isDone && $0.dueDate < Date().timeIntervalSince1970 }.count
@@ -87,10 +95,12 @@ struct TodoListView: View {
                     viewModel.itemsCopy = newValue
                 })
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        withAnimation {
-                            if(isLoading) {
-                                isLoading.toggle()
+                    if(items.isEmpty) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation {
+                                if(isLoading) {
+                                    isLoading.toggle()
+                                }
                             }
                         }
                     }
