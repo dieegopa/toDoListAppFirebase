@@ -17,6 +17,7 @@ class RegisterViewViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var showAlert = false
     @Published var registerAttemps = 0
+    @Published var tryingToRegister = false
     
     init() {}
     
@@ -30,6 +31,7 @@ class RegisterViewViewModel: ObservableObject {
             guard let userId = result?.user.uid else {
                 self!.showAlert.toggle()
                 self!.registerAttemps += 1
+                self!.tryingToRegister.toggle()
                 return
             }
             
@@ -55,6 +57,8 @@ class RegisterViewViewModel: ObservableObject {
                 
                 modelContext.insert(newUser)
                 UserDefaults.standard.set(true, forKey: "isLogged")
+                
+                self!.tryingToRegister = false
             }
         }
     }

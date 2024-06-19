@@ -17,6 +17,7 @@ class LoginViewViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var loginAttemps = 0
     @Published var showAlert = false
+    @Published var tryingToLogin = false
     
     init() {}
     
@@ -30,11 +31,13 @@ class LoginViewViewModel: ObservableObject {
             [weak self] result, error in
             guard error == nil else {
                 self!.loginAttemps += 1
+                self!.tryingToLogin.toggle()
                 return
             }
             
             guard let user = result?.user else {
                 self?.loginAttemps += 1
+                self!.tryingToLogin.toggle()
                 return
             }
             
@@ -45,7 +48,7 @@ class LoginViewViewModel: ObservableObject {
                 .getDocument { document, error in
                     guard let document = document, document.exists else {
                         self?.loginAttemps += 1
-                        
+                        self!.tryingToLogin.toggle()
                         return
                     }
                     
@@ -73,6 +76,7 @@ class LoginViewViewModel: ObservableObject {
                     }
                 }
             self?.showAlert = false
+            self!.tryingToLogin = false
         }
         
     }

@@ -18,13 +18,20 @@ struct MainView: View {
                 if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
                     TodoListView(userId: viewModel.currentUserId)
                         .modelContainer(for: User.self)
+                } else {
+                    ProgressView()
+                        .controlSize(.large)
+                        .tint(.primary)
+                        .transition(.movingParts.blur)
                 }
             } else {
                 LoginView()
                     .modelContainer(for: User.self)
             }
         }.onChange(of: viewModel.isSignedIn) { oldValue, newValue in
-            viewModel.isLogged.toggle()
+            withAnimation {
+                viewModel.isLogged.toggle()
+            }
         }
     }
 }

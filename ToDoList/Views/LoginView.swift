@@ -54,8 +54,10 @@ struct LoginView: View {
                             .transition(.movingParts.blur)
                     }
                     
-                    TLButton(title: "Log in", isLoading: viewModel.showAlert, background: .green) {
+                    TLButton(title: "Log in", isLoading: viewModel.tryingToLogin, background: .green) {
+                        
                         withAnimation {
+                            viewModel.tryingToLogin = true
                             viewModel.login(modelContext: modelContext)
                         }
                         
@@ -63,11 +65,13 @@ struct LoginView: View {
                             withAnimation {
                                 if(viewModel.showAlert) {
                                     viewModel.showAlert.toggle()
+                                    viewModel.tryingToLogin.toggle()
                                 }
                             }
                         }
                     }
-                    .disabled(viewModel.showAlert)
+                    .disabled(viewModel.showAlert || viewModel.tryingToLogin)
+                    .animation(.default, value: viewModel.tryingToLogin || viewModel.showAlert)
                     .frame(height: 50)
                     
                 }

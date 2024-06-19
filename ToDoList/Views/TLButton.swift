@@ -30,6 +30,7 @@ struct TLButton: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(.white)
                 .bold()
+                .transition(.movingParts.blur)
             }
             .foregroundColor(.white)
             .buttonStyle(CustomButtonStyle(backgroundColor: background, pressedColor: background.opacity(0.5)))

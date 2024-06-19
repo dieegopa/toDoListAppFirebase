@@ -62,8 +62,9 @@ struct RegisterView: View {
                         .transition(.movingParts.blur)
                 }
                 
-                TLButton(title: "Create account", isLoading: viewModel.showAlert, background: .orange) {
+                TLButton(title: "Create account", isLoading: viewModel.tryingToRegister, background: .orange) {
                     withAnimation {
+                        viewModel.tryingToRegister = true
                         viewModel.register(modelContext: modelContext)
                     }
                     
@@ -71,12 +72,14 @@ struct RegisterView: View {
                         withAnimation {
                             if(viewModel.showAlert) {
                                 viewModel.showAlert.toggle()
+                                viewModel.tryingToRegister.toggle()
                             }
                         }
                     }
                     
                 }
-                .disabled(viewModel.showAlert)
+                .disabled(viewModel.showAlert || viewModel.tryingToRegister)
+                .animation(.default, value: viewModel.tryingToRegister || viewModel.showAlert)
                 .frame(height: 50)
             }
             .offset(y: -50)
